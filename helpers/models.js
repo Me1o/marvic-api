@@ -9,12 +9,12 @@ const path = require('path');
  */
 const db = {};
 const { Sequelize } = require('sequelize');
-const { DB_PASS = 'root', DB_NAME = 'stella', DB_HOST = 'localhost', DB_USER = 'root' } = process.env;
+const { DB_PASS = '', DB_NAME = 'me1o', DB_HOST = 'localhost', DB_USER = '' } = process.env;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
-  dialect: 'mysql',
+  dialect: 'postgres',
   logging: false,
-  port: 8889,
+  port: 8888,
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci'
