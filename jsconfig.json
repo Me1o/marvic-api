@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "paths": {
+      "mohtwize-podcastic/helpers": ["./helpers"],
+      "mohtwize-podcastic/modules": ["./modules"],
+      "mohtwize-podcastic/test": ["./test"],
+      "mohtwize-podcastic/*": ["./*"],
+    }
+  },
+  "exclude": ["./node_modules/*", "./dist/*"]
+}
