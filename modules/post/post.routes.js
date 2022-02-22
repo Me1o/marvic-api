@@ -10,11 +10,11 @@ const makeCallback = require('marvic-api/helpers/make.callback');
   * @namespace Post.Routes
   * @memberof! Post
   */
-const SearchControllers = require('./controllers');
+const PostControllers = require('./controllers');
 
 
 module.exports = function (app) {
 
-  // app.post('/search', jsonParser, makeCallback(SearchControllers.search));
+   app.get('/feed', jsonParser, makeCallback(PostControllers.feed));
 
 };
