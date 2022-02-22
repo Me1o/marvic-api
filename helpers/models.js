@@ -9,7 +9,7 @@ const path = require('path');
  */
 const db = {};
 const { Sequelize } = require('sequelize');
-const { DB_PASS = '', DB_NAME = 'me1o', DB_HOST = 'localhost', DB_USER = '' } = process.env;
+const { DB_PASS = '', DB_NAME = 'marvic', DB_HOST = 'localhost', DB_USER = '' } = process.env;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   dialect: 'postgres',
@@ -37,12 +37,11 @@ modelsPaths.forEach(modelPath => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 const {
- Building, Property, Reservation, Availability
+ Post
 } = sequelize.models;
 
-Property.belongsTo(Building, { foreignKey: 'building_id', allowNull: false, as: 'Building' });
-Reservation.belongsTo(Property, { foreignKey: 'property_id', allowNull: false, as: 'Property' });
-Availability.belongsTo(Property, { foreignKey: 'property_id', allowNull: false, as: 'Property' });
+//Property.belongsTo(Building, { foreignKey: 'building_id', allowNull: false, as: 'Building' });
+
 
 sequelize.sync();
 
