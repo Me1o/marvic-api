@@ -31,13 +31,12 @@ passport.use('login',
         try {
           const user = await User.findOne({ where: { email: email } });
           if (!user) {
-            return done(null, false, { message: 'User not found' });
+            return done({ code: '1', message: 'User not found' }, false, { message: 'User not found' });
           }
   
           const validate = await user.validPassword(password);
-  
           if (!validate) {
-            return done(null, false, { message: 'Wrong Password' });
+            return done({  code: '2', message: 'Wrong Password' }, false, { message: 'Wrong Password' });
           }
   
           return done(null, user, { message: 'Logged in Successfully' });
