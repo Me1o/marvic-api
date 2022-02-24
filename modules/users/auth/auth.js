@@ -13,7 +13,7 @@ passport.use('signup',
           const user = await User.create({ email, password });
           return done(null, user);
         } catch (error) {
-          done(error);
+          return done('0');
         }
       }
     )
