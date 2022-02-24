@@ -1,5 +1,5 @@
 
 module.exports = async function () {
-  const { models: { Post } } = require('marvic-api/helpers/models');
+  const { models: { Post, User } } = require('marvic-api/helpers/models');
 
 };

@@ -5,5 +5,6 @@
  */
 module.exports = (app) => {
   require('./init.routes')(app);
+  require('./init.auth');
   require('./init.seed.database')(app);
 };
