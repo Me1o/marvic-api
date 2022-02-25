@@ -1,5 +1,7 @@
 const app = require('express')();
+var cors = require('cors')
 
+app.use(cors())
 
 require('./initialize')(app);
 const { sequelize } = require('marvic-api/helpers/models');

@@ -2,6 +2,8 @@ const jsonParser = require('body-parser').json({ extended: true });
 const makeCallback = require('marvic-api/helpers/make.callback');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const { models: { User } } = require('marvic-api/helpers/models');
+
 /**
  * @namespace User
  */
@@ -18,10 +20,15 @@ module.exports = function (app) {
 
  app.post('/signup',passport.authenticate('signup', { session: false }),
   async (req, res, next) => {
-    res.json({
-      message: 'Signup successful',
-      user: req.user
-    });
+    await User.update({ name: req.query.name }, { where: { id: req.user.id } });
+    console.log(res);
+ 
+     res.json({
+        message: 'Signup successful',
+        user: req.user
+      });
+  
+   
   }
 );
 

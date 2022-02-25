@@ -17,14 +17,29 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER, autoIncrement: true
     },
+    name: {
+      type: DataTypes.STRING,
+      required: true,
+      validate: {
+        len: [2, 99]
+      }
+    },
+    bio: {
+      type: DataTypes.TEXT,
+      required: false
+    },
     email: {
       type: DataTypes.STRING,
       required: true,
+      isEmail: true, 
       unique: true
     },
     password: {
       type: DataTypes.STRING,
-      required: true
+      required: true,
+      validate: {
+        len: [8, 99]
+      }
     },
     isConfirmed: {
       type: DataTypes.BOOLEAN,
