@@ -1,7 +1,7 @@
 /**
  *
- * @namespace Post.Controllers
- * @memberof! Post
+ * @namespace User.Controllers
+ * @memberof! User
  */
 
-//module.exports.feed = require('./feed.controller');
+module.exports.getCurrentUser = require('./getCurrentUser.controller');

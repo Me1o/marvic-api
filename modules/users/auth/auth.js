@@ -1,6 +1,9 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const { models: { User } } = require('marvic-api/helpers/models');
+const passportJWT = require("passport-jwt");
+const JWTStrategy   = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
 
 passport.use('signup',
     new localStrategy(
@@ -46,4 +49,5 @@ passport.use('login',
       }
     )
   );
+
   

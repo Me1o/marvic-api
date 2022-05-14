@@ -1,41 +1,38 @@
 /**
  *
- * @namespace Post.Model
- * @memberof! Posts
+ * @namespace Category.Model
+ * @memberof! Category
  */
 
 /**
  * @method Define
- * @memberof Post.Model
+ * @memberof Category.Model
  * @param {Object} sequelize - Sequelize object
  * @param {Object} DataTypes - Sequelize data types
   */
 module.exports = (sequelize, DataTypes) => {
-  const PostSchema = {
+  const CategorySchema = {
     id: {
       primaryKey: true,
       type: DataTypes.INTEGER, autoIncrement: true
     },
-    type: {
-      type: DataTypes.ENUM("TXT", "IMG"),
-      defaultValue: "TXT"
+    storeId: {
+      primaryKey: true,
+      type: DataTypes.INTEGER, autoIncrement: false
+    },
+     name: {
+      type: DataTypes.STRING
      },
-     date: {
-      type: DataTypes.DATE
-     },
-     userId: {
-      type: DataTypes.INTEGER
-     },
-     mediaUrl: {
+     description: {
       type: DataTypes.STRING
     }
     };
 
-  const Post = sequelize.define('Post', PostSchema, {
+  const Category = sequelize.define('Category', CategorySchema, {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci'
   });
 
-  return Post;
+  return Category;
 };
 

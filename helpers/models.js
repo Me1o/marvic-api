@@ -37,7 +37,7 @@ modelsPaths.forEach(modelPath => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 const {
- Post
+ Category
 } = sequelize.models;
 
 //Property.belongsTo(Building, { foreignKey: 'building_id', allowNull: false, as: 'Building' });

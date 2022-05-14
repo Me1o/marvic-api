@@ -24,8 +24,8 @@ module.exports = (sequelize, DataTypes) => {
         len: [2, 99]
       }
     },
-    bio: {
-      type: DataTypes.TEXT,
+    storeId: {
+      type: DataTypes.INTEGER,
       required: false
     },
     email: {

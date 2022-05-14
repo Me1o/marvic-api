@@ -2,8 +2,11 @@ const jsonParser = require('body-parser').json({ extended: true });
 const makeCallback = require('marvic-api/helpers/make.callback');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const { models: { User } } = require('marvic-api/helpers/models');
+const localStrategy = require('passport-local').Strategy;
+const authenticate = require('marvic-api/helpers/authenticate');
 
+
+const { models: { User } } = require('marvic-api/helpers/models');
 /**
  * @namespace User
  */
@@ -17,13 +20,10 @@ const UserControllers = require('./controllers');
 
 
 module.exports = function (app) {
-
  app.post('/signup',passport.authenticate('signup', { session: false }),
   async (req, res, next) => {
     await User.update({ name: req.query.name }, { where: { id: req.user.id } });
-    console.log(res);
- 
-     res.json({
+      res.json({
         message: 'Signup successful',
         user: req.user
       });
@@ -47,7 +47,7 @@ app.post('/login',async (req, res, next) => {
             async (error) => {
               if (error) return next(error);
               const body = { _id: user._id, email: user.email };
-              const token = jwt.sign({ user: body }, 'TOP_SECRET');
+              const token = jwt.sign({ user: body }, 'HereIsATokenCreatedByHosam');
 
               return res.json({ token });
             }
@@ -60,4 +60,5 @@ app.post('/login',async (req, res, next) => {
   }
 );
 
+app.get('/get-current-user',authenticate, makeCallback(UserControllers.getCurrentUser));
 };
