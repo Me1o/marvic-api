@@ -51,25 +51,6 @@ module.exports = async (req, res) => {
 
 };
 
-function isValid(req){
-  const expectedBody = Joi.object().required().keys({
-    id: Joi.number().optional(),
-    name: Joi.string().required(),
-    description:  Joi.string().allow(null, ''),
-    category:  Joi.number().required(),
-    store_policy:  Joi.string().allow(null, ''),
-    primary_contact_number:  Joi.number().allow(null),
-    secondary_contact_number:  Joi.number().allow(null),
-    support_email:  Joi.string().email().allow(null),
-    createdAt:  Joi.string().allow(null),
-    updatedAt:  Joi.string().allow(null),
-  });
-  const error = Joi.validateAndConvert({ object: req, property: 'body', expectedObject: expectedBody }).error;
-  if (error) 
-    return error;
-  else
-    return true;
-}
 
 
 

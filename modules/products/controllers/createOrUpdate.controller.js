@@ -49,6 +49,9 @@ function isValid(req){
     quantity:  Joi.number(),
     createdAt:  Joi.string().allow(null),
     updatedAt:  Joi.string().allow(null),
+    img1:  Joi.string().allow(null),
+    img2:  Joi.string().allow(null),
+    img3:  Joi.string().allow(null),
   });
   const error = Joi.validateAndConvert({ object: req, property: 'body', expectedObject: expectedBody }).error;
   if (error) 
