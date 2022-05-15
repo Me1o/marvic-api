@@ -17,12 +17,12 @@ module.exports = async (req, res) => {
     let product = req.body;
     if(product.id){
       //update store
-      await Product.update({ name: product.name, description: product.description, storeId: user.storeId ,categoryId: product.categoryId, price: product.price, quantity: product.quantity }, { where: { id: product.id } });
+      await Product.update({ name: product.name, description: product.description, storeId: user.storeId ,categoryId: product.categoryId, cost: product.cost, price: product.price, quantity: product.quantity }, { where: { id: product.id } });
     }
     else{
       // new store
       await Product.create(
-        { name: product.name, description: product.description, storeId: user.storeId ,categoryId: product.categoryId, price: product.price, quantity: product.quantity },
+        { name: product.name, description: product.description, storeId: user.storeId ,categoryId: product.categoryId, cost: product.cost, price: product.price, quantity: product.quantity },
         { raw: true, returning: true }
       );
     }
@@ -45,6 +45,7 @@ function isValid(req){
     description:  Joi.string().allow(null, ''),
     categoryId:  Joi.number().allow(null),
     storeId:  Joi.number().allow(null),
+    cost:  Joi.number(),
     price:  Joi.number(),
     quantity:  Joi.number(),
     createdAt:  Joi.string().allow(null),

@@ -37,6 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     storeId: {
       type: DataTypes.INTEGER
     },
+    cost: {
+      type: DataTypes.INTEGER
+    },
     price: {
       type: DataTypes.INTEGER
     },

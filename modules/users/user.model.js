@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
         len: [8, 99]
       }
     },
+    role: {
+      type: DataTypes.ENUM('owner', 'admin', 'customer'),
+      defaultValue: 'owner',
+    },
     isConfirmed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
