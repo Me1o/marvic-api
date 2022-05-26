@@ -14,23 +14,20 @@ const upload = multer({ storage: storage });
 
 
 /**
- * @namespace Store
+ * @namespace Customer
  */
 
 /**
   *
-  * @namespace Store.Routes
-  * @memberof! Store
+  * @namespace Customer.Routes
+  * @memberof! Customer
   */
-const StoreControllers = require('./controllers');
+const CustomerControllers = require('./controllers');
 
 
 module.exports = function (app) {
-   app.get('/store/get',authenticate, jsonParser, makeCallback(StoreControllers.getInfo));
-   app.post('/store/createOrUpdate',authenticate, jsonParser, makeCallback(StoreControllers.createOrUpdate));
-   app.post('/store/uploadLogo',upload.single('logo'),authenticate, makeCallback(StoreControllers.uploadLogo));
-
-   //store endpoints
-   app.get('/store/getByDomain', jsonParser, makeCallback(StoreControllers.getInfoByDomain));
+   app.get('/customer/getByPhone', jsonParser, makeCallback(CustomerControllers.getByPhone));
+   app.get('/customer/list', authenticate, jsonParser, makeCallback(CustomerControllers.list));
+   app.get('/customer/getById',authenticate, jsonParser, makeCallback(CustomerControllers.getById));
 
 };

@@ -30,4 +30,8 @@ module.exports = function (app) {
    app.post('/product/createOrUpdate',authenticate, jsonParser, makeCallback(ProductControllers.createOrUpdate));
    app.post('/product/uploadProductImage',upload.single('logo'),authenticate, makeCallback(ProductControllers.uploadProductImage));
 
+   // store endpoints
+   app.get('/product/listByCategoryId', jsonParser, makeCallback(ProductControllers.listByCategoryId));
+   app.get('/product/getForStore', jsonParser, makeCallback(ProductControllers.getInfoForStore));
+
 };

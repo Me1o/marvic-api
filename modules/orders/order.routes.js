@@ -14,23 +14,19 @@ const upload = multer({ storage: storage });
 
 
 /**
- * @namespace Store
+ * @namespace Order
  */
 
 /**
   *
-  * @namespace Store.Routes
-  * @memberof! Store
+  * @namespace Order.Routes
+  * @memberof! Order
   */
-const StoreControllers = require('./controllers');
+const OrderControllers = require('./controllers');
 
 
 module.exports = function (app) {
-   app.get('/store/get',authenticate, jsonParser, makeCallback(StoreControllers.getInfo));
-   app.post('/store/createOrUpdate',authenticate, jsonParser, makeCallback(StoreControllers.createOrUpdate));
-   app.post('/store/uploadLogo',upload.single('logo'),authenticate, makeCallback(StoreControllers.uploadLogo));
-
-   //store endpoints
-   app.get('/store/getByDomain', jsonParser, makeCallback(StoreControllers.getInfoByDomain));
+   app.post('/order/createOrUpdate', jsonParser, makeCallback(OrderControllers.createOrUpdate));
+   app.get('/order/list', authenticate, jsonParser, makeCallback(OrderControllers.list));
 
 };

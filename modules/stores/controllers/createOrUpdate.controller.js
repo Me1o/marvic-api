@@ -14,12 +14,12 @@ module.exports = async (req, res) => {
     let store = req.body;
     if(store.id){
       //update store
-      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email }, { where: { id: store.id } });
+      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain }, { where: { id: store.id } });
     }
     else{
       // new store
       await Store.create(
-        { name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email },
+        { name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain },
         { raw: true, returning: true }
       ).then(result => 
         {
@@ -53,6 +53,8 @@ function isValid(req){
     support_email:  Joi.string().email().allow(null),
     createdAt:  Joi.string().allow(null),
     updatedAt:  Joi.string().allow(null),
+    storeLogoUrl:  Joi.string().allow(null),
+    domain:  Joi.string().allow(null),
   });
   const error = Joi.validateAndConvert({ object: req, property: 'body', expectedObject: expectedBody }).error;
   if (error) 

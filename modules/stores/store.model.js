@@ -28,6 +28,9 @@ module.exports = (sequelize, DataTypes) => {
     storeLogoUrl: {
       type: DataTypes.STRING
     },
+    domain: {
+      type: DataTypes.STRING
+    },
     store_policy: {
       type: DataTypes.STRING
     },

@@ -42,8 +42,15 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     role: {
-      type: DataTypes.ENUM('owner', 'admin', 'customer'),
+      type: DataTypes.ENUM('owner', 'admin'),
       defaultValue: 'owner',
+    },
+    package: {
+      type: DataTypes.ENUM('standard', 'premium'),
+      defaultValue: 'standard',
+    },
+    validTill: {
+      type: DataTypes.DATEONLY
     },
     isConfirmed: {
       type: DataTypes.BOOLEAN,
