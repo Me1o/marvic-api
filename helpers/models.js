@@ -13,6 +13,10 @@ const { DB_PASS = '', DB_NAME = 'marvic', DB_HOST = 'localhost', DB_USER = '', D
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   dialect: 'postgres',
+  ssl: {      /* <----- Add SSL option */
+  require: true,
+  rejectUnauthorized: false 
+  },
   logging: false,
   port: DB_PORT,
   define: {
