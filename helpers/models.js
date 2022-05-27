@@ -30,7 +30,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   }
 });
 
-
+ 
 const modelsPaths = glob.sync('./modules/**/*.model.js');
 
 modelsPaths.forEach(modelPath => {
