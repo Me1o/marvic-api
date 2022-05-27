@@ -9,12 +9,12 @@ const path = require('path');
  */
 const db = {};
 const { Sequelize } = require('sequelize');
-const { DB_PASS = '', DB_NAME = 'marvic', DB_HOST = 'localhost', DB_USER = '' } = process.env;
+const { DB_PASS = '', DB_NAME = 'marvic', DB_HOST = 'localhost', DB_USER = '', DB_PORT } = process.env;
 const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   dialect: 'postgres',
   logging: false,
-  port: 8888,
+  port: DB_PORT,
   define: {
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci'
