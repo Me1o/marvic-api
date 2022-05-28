@@ -41,7 +41,14 @@ passport.use('login',
           if (!validate) {
             return done({  code: '2', message: 'Wrong Password' }, false, { message: 'Wrong Password' });
           }
-  
+
+          const today = new Date();
+          const validTillDate = new Date(user.validTill);
+          const isValidPackage = validTillDate > today;
+                    if(!isValidPackage){
+            return done({  code: '3', message: 'Package expired' }, false, { message: 'Package expired' });
+          }
+
           return done(null, user, { message: 'Logged in Successfully' });
         } catch (error) {
           return done(error);
