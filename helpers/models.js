@@ -17,6 +17,7 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   ssl : true,
   dialectOptions : {
     ssl: true,
+    rejectUnauthorized: false 
   },
   port: DB_PORT,
   define: {
