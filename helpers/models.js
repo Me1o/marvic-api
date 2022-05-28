@@ -14,10 +14,11 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   dialect: 'postgres',
   logging: false,
-  ssl : true,
-  dialectOptions : {
-    ssl: true,
-    rejectUnauthorized: false 
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
   },
   port: DB_PORT,
   define: {
