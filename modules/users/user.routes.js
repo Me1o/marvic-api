@@ -46,7 +46,7 @@ app.post('/login',async (req, res, next) => {
             { session: false },
             async (error) => {
               if (error) return next(error);
-              const body = { _id: user._id, email: user.email };
+              const body = { user };
               const token = jwt.sign({ user: body }, 'HereIsATokenCreatedByHosam');
 
               return res.json({ token });
