@@ -29,6 +29,7 @@ module.exports = function (app) {
    app.get('/store/get',authenticate, jsonParser, makeCallback(StoreControllers.getInfo));
    app.post('/store/createOrUpdate',authenticate, jsonParser, makeCallback(StoreControllers.createOrUpdate));
    app.post('/store/uploadLogo',upload.single('logo'),authenticate, makeCallback(StoreControllers.uploadLogo));
+   app.get('/store/isDomainAvailable',authenticate, jsonParser, makeCallback(StoreControllers.isDomainAvailable));
 
    //store endpoints
    app.get('/store/getByDomain', jsonParser, makeCallback(StoreControllers.getInfoByDomain));

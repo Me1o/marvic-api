@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
         let index = req.query.index;
         let productId = req.query.productId;
         let userId = req.user.dataValues.id;
-        const product = await Product.findOne({ where: { id: productId }, attributes: ['storeId'], raw: true });
+        const product = await Product.findOne({ where: { id: productId }, attributes: ['storeId', 'id'], raw: true });
         const user = await User.findOne({ where: { id: userId }, attributes: ['storeId'], raw: true });
         if(product.storeId == user.storeId){
           const path = req.file.path;
