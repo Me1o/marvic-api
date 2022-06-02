@@ -13,6 +13,7 @@ passport.use('signup',
       },
       async (email, password, done) => {
         try {
+          email = email.toLowerCase()
           const user = await User.create({ email, password });
           return done(null, user);
         } catch (error) {
@@ -32,7 +33,7 @@ passport.use('login',
       },
       async (email, password, done) => {
         try {
-          const user = await User.findOne({ where: { email: email } });
+          const user = await User.findOne({ where: { email: email.toLowerCase() } });
           if (!user) {
             return done({ code: '1', message: 'User not found' }, false, { message: 'User not found' });
           }

@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     let store = req.body;
     if(store.id){
       //update store
-      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain }, { where: { id: store.id } });
+      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain.toLowerCase() }, { where: { id: store.id } });
     }
     else{
       // new store

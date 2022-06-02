@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
    */
   try {
 
-    let domain = req.query.domain;
+    let domain = req.query.domain.toLowerCase();
       const store = await Store.findOne({ where: { domain: domain }, raw: true });
       res.json({ case: 0, message: store });
   
