@@ -34,9 +34,12 @@ module.exports = async (req, res) => {
     let orderId; 
     for(let obj of orderObj.orderProducts){
       let product = await Product.findOne({ where: { id: obj.productId, storeId: storeid }, raw: true });
-      if(product != null){
+      if(product != null && product.quantity >= obj.quantity){
         price = price + product.price;
         orderProducts.push(JSON.stringify(obj));
+        //edit the stock quantity
+        let q = product.quantity - obj.quantity;
+        Product.update({ quantity: q}, { where: { id: product.id } });
       }
     }
     await Order.create(
@@ -44,10 +47,10 @@ module.exports = async (req, res) => {
       { raw: true, returning: true }
     ).then(result => 
       {
-        orderId = result.id ;
+        orderId = result.id;
       }
     );
-
+      
      res.json({ case: 1, message: orderId });
   
   } catch (err) {

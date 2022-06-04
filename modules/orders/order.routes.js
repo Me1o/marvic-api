@@ -29,5 +29,6 @@ module.exports = function (app) {
    app.post('/order/createOrUpdate', jsonParser, makeCallback(OrderControllers.createOrUpdate));
    app.post('/order/setStatus',authenticate, jsonParser, makeCallback(OrderControllers.setStatus));
    app.get('/order/list', authenticate, jsonParser, makeCallback(OrderControllers.list));
+   app.post('/order/delete', authenticate, jsonParser, makeCallback(OrderControllers.delete));
 
 };
