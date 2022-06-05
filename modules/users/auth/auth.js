@@ -45,10 +45,14 @@ passport.use('login',
 
           const today = new Date();
           const validTillDate = new Date(user.validTill);
-          const isValidPackage = validTillDate > today;
-                    if(!isValidPackage){
-            return done({  code: '3', message: 'Package expired' }, false, { message: 'Package expired' });
+          if(user.validTill == null){
+            return done({  code: '4', message: 'new user' }, false, { message: 'new user' });
           }
+
+          const isValidPackage = validTillDate > today;
+            if(!isValidPackage){
+            return done({  code: '3', message: 'Package expired' }, false, { message: 'Package expired' });
+            }
 
           return done(null, user, { message: 'Logged in Successfully' });
         } catch (error) {
