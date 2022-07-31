@@ -11,28 +11,30 @@ module.exports = async (req, res) => {
      let validationResult = isValid(req);
      if(validationResult != true) return res.json({ case: 0, message: 'Validation Error!', validationResult });
 
+     let userId = req.user.dataValues.id;
+     let user =   await User.findOne({ where: { id: userId }, attributes: ['storeId'], raw: true });
+
     let store = req.body;
-    if(store.id){
+    if(user.storeId != null){
       //update store
-      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain.toLowerCase() }, { where: { id: store.id } });
+      await Store.update({name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain.toLowerCase() }, { where: { id: user.storeId } });
     }
     else{
       // new store
       await Store.create(
         { name: store.name, description: store.description, category: store.category, store_policy: store.store_policy, primary_contact_number: store.primary_contact_number, secondary_contact_number: store.secondary_contact_number, support_email: store.support_email, domain: store.domain },
         { raw: true, returning: true }
-      ).then(result => 
+      ).then(result =>
         {
           //add store id to user obj
-          let userId = req.user.dataValues.id;
           User.update({ storeId: result.id }, { where: { id: userId } });
         }
       );
     }
 
-  
+
      res.json({ case: 0, message: 'Store created/ updated!' });
-  
+
   } catch (err) {
     console.log(err);
     return res.json({ case: 0, message: 'Something went wrong!', err });
@@ -57,7 +59,7 @@ function isValid(req){
     domain:  Joi.string().allow(null),
   });
   const error = Joi.validateAndConvert({ object: req, property: 'body', expectedObject: expectedBody }).error;
-  if (error) 
+  if (error)
     return error;
   else
     return true;
