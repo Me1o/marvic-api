@@ -50,6 +50,10 @@ module.exports = (sequelize, DataTypes) => {
     slug: {
       type: DataTypes.STRING,
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   };
 
   const Product = sequelize.define("Product", ProductSchema, {
