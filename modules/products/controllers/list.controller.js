@@ -20,11 +20,10 @@ module.exports = async (req, res) => {
     });
 
     // filters
-    var whereStatement = { storeId: user.storeId, isActive: true };
+    var whereStatement = { storeId: user.storeId };
     if (categoryId) whereStatement.categoryId = categoryId;
     if (keyword) whereStatement.name = { [Op.substring]: keyword };
 
-    console.log(whereStatement);
     //query
     const Products = await Product.findAll({
       where: whereStatement,
