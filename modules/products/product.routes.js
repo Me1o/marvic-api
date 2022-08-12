@@ -47,19 +47,28 @@ module.exports = function (app) {
     authenticate,
     makeCallback(ProductControllers.uploadProductImage)
   );
-  app.post(
-    "/product/delete",
-    authenticate,
-    jsonParser,
-    makeCallback(ProductControllers.delete)
-  );
+
   app.post(
     "/product/toggle",
     authenticate,
     jsonParser,
     makeCallback(ProductControllers.toggleAvailability)
   );
+  
+ app.post(
+    "/product/deleteProductImage",
+    authenticate,
+    jsonParser,
+    makeCallback(ProductControllers.deleteProductImage)
+  );
 
+  app.post(
+    "/product/delete",
+    authenticate,
+    jsonParser,
+    makeCallback(ProductControllers.delete)
+  );
+  
   // store endpoints
   app.get(
     "/product/listByCategoryId",

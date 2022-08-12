@@ -38,6 +38,7 @@ module.exports = async (req, res) => {
           cost: product.cost,
           price: product.price,
           quantity: product.quantity,
+          slug: productSlug,
         },
         { where: { id: product.id } }
       );
