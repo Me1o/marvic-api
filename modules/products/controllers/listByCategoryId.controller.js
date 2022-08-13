@@ -1,6 +1,8 @@
-const Joi = require('marvic-api/helpers/joi');
-const { Op, where } = require('sequelize');
-const { models: { User, Product } } = require('marvic-api/helpers/models');
+const Joi = require("marvic-api/helpers/joi");
+const { Op, where } = require("sequelize");
+const {
+  models: { User, Product },
+} = require("marvic-api/helpers/models");
 
 module.exports = async (req, res) => {
   /**
@@ -10,11 +12,13 @@ module.exports = async (req, res) => {
   try {
     let categoryId = req.query.categoryId;
     //query
-    const Products = await Product.findAll({ where: {categoryId: categoryId}, raw: true });
+    const Products = await Product.findAll({
+      where: { categoryId: categoryId, isActive: true },
+      raw: true,
+    });
 
     res.json({ case: 0, message: Products });
-    
- } catch (err) {
-   return res.json({ case: 0, message: 'Something went wrong!', err });
- }
+  } catch (err) {
+    return res.json({ case: 0, message: "Something went wrong!", err });
+  }
 };
