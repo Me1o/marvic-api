@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Product.sync({ alter: true }).then(() => {
-    console.log("DONE");
+    console.log("product table updated");
   });
 
   return Product;
