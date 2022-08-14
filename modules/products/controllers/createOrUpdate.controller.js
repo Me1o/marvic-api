@@ -85,6 +85,7 @@ function isValid(req) {
       img1: Joi.string().allow(null),
       img2: Joi.string().allow(null),
       img3: Joi.string().allow(null),
+      isActive: Joi.boolean().allow(null),
     });
   const error = Joi.validateAndConvert({
     object: req,
