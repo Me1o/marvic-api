@@ -13,3 +13,4 @@ module.exports.updateIdentity = require("./updateIdentity.controller");
 
 //store endpoints
 module.exports.getInfoByDomain = require("./getInfoByDomain.controller");
+module.exports.getIdentity = require("./getIdentity.controller");

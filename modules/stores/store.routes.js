@@ -67,4 +67,9 @@ module.exports = function (app) {
     jsonParser,
     makeCallback(StoreControllers.getInfoByDomain)
   );
+  app.get(
+    "/store/getIdentity",
+    jsonParser,
+    makeCallback(StoreControllers.getIdentity)
+  );
 };
