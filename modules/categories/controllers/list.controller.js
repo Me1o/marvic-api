@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
      const user = await User.findOne({ where: { id: userId }, attributes: ['storeId'], raw: true });
      var categories = await Category.findAll({ where: { storeId: user.storeId }, raw: true });
      categories.forEach(async(cat) => {
-      cat["products"] = await Product.count({ where: { categoryId: cat.id } });
+      cat.productsCount = await Product.count({ where: { categoryId: cat.id } });
      });
 
      res.json({ case: 0, message: categories });

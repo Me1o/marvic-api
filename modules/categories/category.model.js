@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
      },
      description: {
       type: DataTypes.STRING
+    },
+    productsCount: {
+      type: DataTypes.VIRTUAL
     }
     };
 
