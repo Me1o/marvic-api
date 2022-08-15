@@ -18,6 +18,6 @@ module.exports = function (app) {
 
    app.get('/category/list', authenticate, jsonParser, makeCallback(CategoryControllers.list));
    app.get('/category/listForStore', jsonParser, makeCallback(CategoryControllers.listForStore));
-   app.post('/category/create', authenticate, jsonParser, makeCallback(CategoryControllers.create));
+   app.post('/category/createOrUpdate', authenticate, jsonParser, makeCallback(CategoryControllers.createOrUpdate));
 
 };
