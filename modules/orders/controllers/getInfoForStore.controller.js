@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     let phone = req.query.id;
 
       const customer = await Customer.findOne({ where: { phone: phone,  },attributes: ['id', 'name', 'address', 'phone'], raw: true });
-      if(customer == null) return null;
+      if(customer == null)  return res.json({ case: 0, message: 'Something went wrong!', err });
 
       const order = await Order.findOne({ where: { id: id, customerId: customer.id   },attributes: ['id', 'status', 'address', 'price', 'products'], raw: true });
       res.json({ case: 0, message: order });
