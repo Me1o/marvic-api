@@ -15,12 +15,12 @@ module.exports = async (req, res) => {
     let newCustomerId;
 
     //check for customer
-    const customer = await Customer.findOne({ where: { phone: customerObj.phone, storeId: storeid }, raw: true });
+    const customer = await Customer.findOne({ where: { phone: customerObj.phone }, raw: true });
     if(customer == null){
       await Customer.create(
         { name: customerObj.name, phone: customerObj.phone, address: customerObj.address, storeId: storeid },
         { raw: true, returning: true }
-      ).then(result => 
+      ).then(result =>
         {
           newCustomerId = result.id ;
         }
@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
 
     var orderProducts = [];
     var price = 0;
-    let orderId; 
+    let orderId;
     for(let obj of orderObj.orderProducts){
       let product = await Product.findOne({ where: { id: obj.productId, storeId: storeid }, raw: true });
       if(product != null && product.quantity >= obj.quantity){
@@ -45,14 +45,14 @@ module.exports = async (req, res) => {
     await Order.create(
       { products: orderProducts.join(), customerId: newCustomerId, address: orderObj.address, price: price, storeId: storeid },
       { raw: true, returning: true }
-    ).then(result => 
+    ).then(result =>
       {
         orderId = result.id;
       }
     );
-      
+
      res.json({ case: 1, message: orderId });
-  
+
   } catch (err) {
     return res.json({ case: 0, message: 'Something went wrong!', err });
   }
