@@ -9,47 +9,47 @@
  * @memberof Store.Model
  * @param {Object} sequelize - Sequelize object
  * @param {Object} DataTypes - Sequelize data types
-  */
+ */
 module.exports = (sequelize, DataTypes) => {
   const StoreSchema = {
     id: {
       primaryKey: true,
-      type: DataTypes.INTEGER, autoIncrement: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
     },
-     name: {
-      type: DataTypes.STRING
-     },
-     description: {
-      type: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.STRING,
     },
     category: {
-      type: DataTypes.INTEGER
-    }, 
+      type: DataTypes.INTEGER,
+    },
     storeLogoUrl: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     domain: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     store_policy: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT,
     },
     primary_contact_number: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     secondary_contact_number: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     support_email: {
-      type: DataTypes.STRING
-    }
-    };
+      type: DataTypes.STRING,
+    },
+  };
 
-  const Store = sequelize.define('Store', StoreSchema, {
-    charset: 'utf8mb4',
-    collate: 'utf8mb4_unicode_ci'
+  const Store = sequelize.define("Store", StoreSchema, {
+    charset: "utf8mb4",
+    collate: "utf8mb4_unicode_ci",
   });
 
   return Store;
 };
-
