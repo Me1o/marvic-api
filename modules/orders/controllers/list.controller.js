@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
 
       const orderProducts = await ProductOrder.findAll({
         where: whereStatement,
-        attributes: ["productId", "quantity"],
+        attributes: ["productId", "quantity", "productName"],
         raw: true,
       });
 
