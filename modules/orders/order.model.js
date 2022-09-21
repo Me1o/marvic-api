@@ -40,8 +40,12 @@ module.exports = (sequelize, DataTypes) => {
     collate: "utf8mb4_unicode_ci",
   });
 
+  Order.associate = (models) => {
+    Order.hasMany(models.ProductOrder, { foreignKey: "OrderId" });
+  };
+
   Order.sync({ alter: true }).then(() => {
-    console.log("order table updated");
+    console.log("order model synces");
   });
 
   return Order;

@@ -20,12 +20,6 @@ module.exports = (sequelize, DataTypes) => {
     productId: {
       type: DataTypes.INTEGER,
     },
-    productName: {
-      type: DataTypes.INTEGER,
-    },
-    orderId: {
-      type: DataTypes.INTEGER,
-    },
     customerId: {
       type: DataTypes.INTEGER,
     },
@@ -35,12 +29,24 @@ module.exports = (sequelize, DataTypes) => {
     quantity: {
       type: DataTypes.INTEGER,
     },
+    OrderId: {
+      type: DataTypes.INTEGER,
+    },
   };
 
   const ProductOrder = sequelize.define("ProductOrder", ProductOrderSchema, {
     charset: "utf8mb4",
     collate: "utf8mb4_unicode_ci",
   });
+
+  ProductOrder.associate = (models) => {
+    ProductOrder.belongsTo(models.Product, {
+      foreignKey: "productId",
+      as: "product",
+    });
+
+    ProductOrder.belongsTo(models.Order);
+  };
 
   ProductOrder.sync({ alter: true }).then(() => {
     console.log("product order table updated");

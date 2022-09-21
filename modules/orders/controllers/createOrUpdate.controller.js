@@ -43,36 +43,41 @@ module.exports = async (req, res) => {
         raw: true,
       });
       if (product != null && product.quantity >= obj.quantity) {
-        price = price + product.price;
-        obj.id = product.id;
+        price += product.price * obj.quantity;
+        obj.productId = product.id;
         //edit the stock quantity
         let q = product.quantity - obj.quantity;
         Product.update({ quantity: q }, { where: { id: product.id } });
       }
     }
-    await Order.create(
-      {
-        customerId: newCustomerId,
-        address: orderObj.address,
-        price: price,
-        storeId: storeid,
-      },
-      { raw: true, returning: true }
-    ).then(async (result) => {
-      orderId = result.id;
-      for (let product of orderObj.orderProducts) {
-        await ProductOrder.create({
-          productId: product.id,
-          orderId: result.id,
+
+    let newOrder = {
+      customerId: newCustomerId,
+      address: orderObj.address,
+      price: price,
+      storeId: storeid,
+      ProductOrders: orderObj.orderProducts.map((product) => {
+        return {
+          productId: product.productId,
           customerId: newCustomerId,
           storeId: storeid,
           quantity: product.quantity,
-        });
-      }
+        };
+      }),
+    };
+
+    await Order.create(newOrder, {
+      raw: true,
+      nested: true,
+      returning: true,
+      include: [{ model: ProductOrder }],
+    }).then(async (result) => {
+      orderId = result.id;
     });
 
     res.json({ case: 1, message: orderId });
   } catch (err) {
+    console.log({ err });
     return res.json({ case: 0, message: "Something went wrong!", err });
   }
 };
