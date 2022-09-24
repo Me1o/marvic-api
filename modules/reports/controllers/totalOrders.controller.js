@@ -25,8 +25,9 @@ module.exports = async (req, res) => {
         400
       );
 
-    if (dateFrom) dateFrom = new Date(dateFrom);
-    if (dateTo) dateTo = new Date(dateTo);
+    if (dateFrom) dateFrom = Date.parse(dateFrom);
+    if (dateTo) dateTo = Date.parse(dateTo);
+
 
     let userId = req.user.dataValues.id;
     const user = await User.findOne({
@@ -48,13 +49,22 @@ module.exports = async (req, res) => {
       return date >= dateFrom && date <= dateTo;
     });
 
+    filtered = dateFrom && dateTo ? filtered : orders;
+
     let totalOrders = 0;
-    if (filtered.length > 0)
-      totalOrders = filtered.reduce(
-        (order2, order1) => order1.price + order2.price
-      );
-    res.json({ case: 0, message: filtered, totalPrice: totalOrders });
+
+    if (filtered.length > 0) totalOrders = filtered.reduce(getSum, totalOrders);
+    res.json({
+      case: 0,
+      message: filtered,
+      totalPrice: totalOrders,
+    });
   } catch (err) {
+    console.log(err)
     return res.json({ case: 0, message: "Something went wrong!", err });
   }
 };
+
+function getSum(total, num) {
+  return total + Math.round(num.price);
+}

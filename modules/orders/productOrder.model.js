@@ -1,25 +1,24 @@
 /**
  *
- * @namespace Order.Model
+ * @namespace ProductOrder.Model
  * @memberof! Order
  */
 
 /**
  * @method Define
- * @memberof Order.Model
+ * @memberof ProductOrder.Model
  * @param {Object} sequelize - Sequelize object
  * @param {Object} DataTypes - Sequelize data types
  */
 module.exports = (sequelize, DataTypes) => {
-  const OrderSchema = {
+  const ProductOrderSchema = {
     id: {
       primaryKey: true,
       type: DataTypes.INTEGER,
       autoIncrement: true,
     },
-    status: {
+    productId: {
       type: DataTypes.INTEGER,
-      defaultValue: 1,
     },
     customerId: {
       type: DataTypes.INTEGER,
@@ -27,26 +26,31 @@ module.exports = (sequelize, DataTypes) => {
     storeId: {
       type: DataTypes.INTEGER,
     },
-    address: {
-      type: DataTypes.TEXT,
+    quantity: {
+      type: DataTypes.INTEGER,
     },
-    price: {
+    OrderId: {
       type: DataTypes.INTEGER,
     },
   };
 
-  const Order = sequelize.define("Order", OrderSchema, {
+  const ProductOrder = sequelize.define("ProductOrder", ProductOrderSchema, {
     charset: "utf8mb4",
     collate: "utf8mb4_unicode_ci",
   });
 
-  Order.associate = (models) => {
-    Order.hasMany(models.ProductOrder, { foreignKey: "OrderId" });
+  ProductOrder.associate = (models) => {
+    ProductOrder.belongsTo(models.Product, {
+      foreignKey: "productId",
+      as: "product",
+    });
+
+    ProductOrder.belongsTo(models.Order);
   };
 
-  Order.sync({ alter: true }).then(() => {
-    console.log("order model synces");
+  ProductOrder.sync({ alter: true }).then(() => {
+    console.log("product order table updated");
   });
 
-  return Order;
+  return ProductOrder;
 };
