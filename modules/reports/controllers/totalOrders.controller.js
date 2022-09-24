@@ -25,8 +25,9 @@ module.exports = async (req, res) => {
         400
       );
 
-    if (dateFrom) dateFrom = new Date(dateFrom);
-    if (dateTo) dateTo = new Date(dateTo);
+    if (dateFrom) dateFrom = Date.parse(dateFrom);
+    if (dateTo) dateTo = Date.parse(dateTo);
+
 
     let userId = req.user.dataValues.id;
     const user = await User.findOne({
@@ -59,6 +60,7 @@ module.exports = async (req, res) => {
       totalPrice: totalOrders,
     });
   } catch (err) {
+    console.log(err)
     return res.json({ case: 0, message: "Something went wrong!", err });
   }
 };
